@@ -1,0 +1,5 @@
+{% extends "base.html" %}
+{% block title %}Order confirmed — Northstar Market{% endblock %}
+{% block content %}
+<section class="success-page"><div class="success-icon">✦</div><p class="eyebrow">Thank you, {{ order.full_name|truncatewords:1 }}</p><h1>Your order is<br><em>on its way.</em></h1><p class="success-copy">We’ve received order <strong>#{{ order.id }}</strong> and sent a confirmation to {{ order.email }}. We’ll let you know when it ships.</p><div class="success-card"><div class="summary-line"><span>Order total</span><strong>${{ order.total|floatformat:2 }}</strong></div>{% for item in order.items.all %}<div class="mini-item"><div><strong>{{ item.product_name }}</strong><span>Qty {{ item.quantity }}</span></div><b>${{ item.subtotal|floatformat:2 }}</b></div>{% endfor %}</div><div class="success-actions"><a class="button button-dark" href="{% url 'home' %}#shop">Continue shopping <span>↗</span></a><a class="underlined-link" href="{% url 'orders' %}">View my orders</a></div></section>
+{% endblock %}

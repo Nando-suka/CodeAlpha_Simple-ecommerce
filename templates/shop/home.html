@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Northstar Market — Everyday goods, thoughtfully selected{% endblock %}
+{% block content %}
+<section class="hero">
+  <div class="hero-copy"><p class="eyebrow">A small shop with a big point of view</p><h1>Good things,<br><em>well chosen.</em></h1><p class="hero-text">Useful objects, quiet luxuries, and everyday essentials that earn their place in your life.</p><a class="button button-dark" href="#shop">Explore the edit <span>↘</span></a></div>
+  <div class="hero-art"><div class="sun-shape"></div><div class="hero-card hero-card-back"></div><div class="hero-card hero-card-front"><span>THE<br>EVERYDAY<br>EDIT</span></div><div class="hero-flower">✽</div></div>
+</section>
+
+<section class="ticker"><div>Thoughtfully selected</div><span>✦</span><div>Made to be used</div><span>✦</span><div>Small joys, daily</div><span>✦</span><div>Thoughtfully selected</div></section>
+
+<section class="section shop-section" id="shop">
+  <div class="section-heading"><div><p class="eyebrow">The collection</p><h2>Find your new favorite.</h2></div><p class="section-intro">From morning coffee to weekend escapes, these are the things we reach for again and again.</p></div>
+  <div class="filter-row">
+    <div class="category-tabs"><a class="{% if not selected_category %}active{% endif %}" href="{% url 'home' %}#shop">All</a>{% for category in categories %}<a class="{% if selected_category == category.slug %}active{% endif %}" href="?category={{ category.slug }}#shop">{{ category.name }}</a>{% endfor %}</div>
+    {% if query %}<span class="result-label">Results for “{{ query }}”</span>{% endif %}
+  </div>
+  {% if products %}
+    <div class="product-grid">{% for product in products %}{% include "shop/product_card.html" %}{% endfor %}</div>
+  {% else %}<div class="empty-state"><span>⌕</span><h3>No products found</h3><p>Try another search or browse the full collection.</p><a href="{% url 'home' %}#shop" class="text-link">View all products</a></div>{% endif %}
+</section>
+
+<section class="story-section" id="story"><div class="story-art"><div class="story-circle"></div><span class="story-label">USEFUL<br>BEAUTY</span></div><div class="story-copy"><p class="eyebrow">Our point of view</p><h2>Less, but<br><em>better.</em></h2><p>We believe the objects around us can make ordinary moments feel a little more considered. So we look for the useful, the enduring, and the quietly beautiful.</p><a class="underlined-link" href="#shop">Meet the collection <span>↗</span></a></div></section>
+<section class="newsletter"><div><p class="eyebrow">A note from us</p><h2>Good things,<br><em>in your inbox.</em></h2></div><form onsubmit="return false"><label for="email">Occasional notes, new finds, no noise.</label><div class="newsletter-input"><input id="email" type="email" placeholder="Your email address"><button type="submit">→</button></div></form></section>
+{% endblock %}
